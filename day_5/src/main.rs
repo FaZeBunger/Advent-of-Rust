@@ -24,9 +24,9 @@ fn part_1() {
 
     for line in instructions.lines() {
         let words: Vec<&str> = line.split_whitespace().collect();
-        let amount: usize = words[1].trim().parse().unwrap();
-        let mut origin: usize = words[3].trim().parse().unwrap();
-        let mut dest: usize = words[5].trim().parse().unwrap();
+        let amount: usize = convert_to_usize(words[1]);
+        let mut origin: usize = convert_to_usize(words[3]);
+        let mut dest: usize = convert_to_usize(words[5]);
         dest -= 1;
         origin -= 1;
 
