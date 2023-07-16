@@ -27,7 +27,6 @@ fn part_1() {
         let amount: usize = words[1].trim().parse().unwrap();
         let mut origin: usize = words[3].trim().parse().unwrap();
         let mut dest: usize = words[5].trim().parse().unwrap();
-
         dest -= 1;
         origin -= 1;
 
