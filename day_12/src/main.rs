@@ -88,7 +88,6 @@ fn traverse(
     //
     //  4. Return whatever value is in the mutex currently.
 
-
     for next_node in get_surrounding(&matrix, node.coords) {
         if node.can_move(next_node.value) {
             if seen.contains(&next_node.coords) {
