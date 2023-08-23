@@ -1,1 +1,1 @@
-/Users/Ethan/VsCode/rust/Advent-of-Rust/day_12/target/debug/day_12: /Users/Ethan/VsCode/rust/Advent-of-Rust/day_12/src/linked_list.rs /Users/Ethan/VsCode/rust/Advent-of-Rust/day_12/src/main.rs
+/home/eb/rust/Advent\ of\ Code/Advent-of-Rust/day_12/target/debug/day_12: /home/eb/rust/Advent\ of\ Code/Advent-of-Rust/day_12/src/linked_list.rs /home/eb/rust/Advent\ of\ Code/Advent-of-Rust/day_12/src/main.rs

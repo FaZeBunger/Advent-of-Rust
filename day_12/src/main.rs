@@ -1,4 +1,6 @@
 use std::fs;
+use std::sync::{Mutex, MutexGuard};
+use std::thread;
 
 mod linked_list;
 
@@ -32,7 +34,7 @@ fn get_surrounding(matrix: &Vec<Vec<char>>, (x, y): (usize, usize)) -> Vec<linke
 }
 
 fn create_matrix() -> Matrix {
-    fs::read_to_string("./input.txt")
+    fs::read_to_string("./test.txt")
         .unwrap()
         .lines()
         .map(|line| line.chars().collect::<Vec<char>>())
@@ -60,9 +62,7 @@ fn traverse(
     if node.value == 'E' {
         return;
     }
-
     seen.push(node.coords);
-
     // I want to spawn a new thread for each surrounding node so that
     // each can run concurrently.
     //
@@ -116,6 +116,22 @@ fn traverse(
     return;
 }
 
+fn handler(matrix: &Matrix, node: linked_list::Node, depth: usize, seen: Vec<Coord>) {
+    for adj_node in get_surrounding(matrix, node.coords) {
+        let matrix = matrix.clone();
+        let node = node.clone();
+        let depth = depth.clone();
+        let mut seen = seen.clone();
+
+        thread::spawn(move || {
+            if node.can_move(adj_node.value) {
+                let mut current_shortest = MAX_SIZE;
+                traverse(&matrix, adj_node, depth, &mut seen, &mut current_shortest);
+            }
+        });
+    }
+}
+
 fn part_1() {
     use linked_list::Node;
 
@@ -123,11 +139,10 @@ fn part_1() {
     let matrix = create_matrix();
     let start_index = find_char(&create_matrix(), 'S').unwrap();
     let start_node = Node::new('S', start_index);
-    let mut seen = Vec::new();
-    let mut curr_shortest = MAX_SIZE;
+    let seen = Vec::new();
+    let curr_shortest = MAX_SIZE;
 
-    traverse(&matrix, start_node, depth, &mut seen, &mut curr_shortest);
-
+    handler(&matrix, start_node, depth, seen);
     println!("Found Length: {}", curr_shortest);
 }
 
