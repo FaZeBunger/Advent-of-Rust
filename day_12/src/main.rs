@@ -105,7 +105,6 @@ fn traverse(
                 }
                 return;
             }
-
             _depth += 1;
             traverse(&matrix, next_node, _depth, seen, curr_shortest);
             _depth -= 1;
